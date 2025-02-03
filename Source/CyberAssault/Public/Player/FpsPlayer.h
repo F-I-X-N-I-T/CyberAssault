@@ -49,11 +49,11 @@ private:
 	UPROPERTY(EditAnywhere)
 	USkeletalMeshComponent* PlayerMesh;
 
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Player")
-	//float MouseSensitivity = 1.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Player")
+	float MouseSensitivityYaw = 1.f;
 
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Player")
-	//float MouseSensitivityPitch = 1.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Player")
+	float MouseSensitivityPitch = 1.f;
 
 public:	
 	// Called every frame

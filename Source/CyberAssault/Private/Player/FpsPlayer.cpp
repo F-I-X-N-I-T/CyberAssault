@@ -61,10 +61,14 @@ void AFpsPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 
 void AFpsPlayer::MoveEnhancedInput(const FInputActionValue& Value)
 {
-	
+	FVector2d MovementVector = Value.Get<FVector2d>();
+	AddMovementInput(GetActorForwardVector(), MovementVector.Y);
+	AddMovementInput(GetActorRightVector(), MovementVector.X);
 }
 
 void AFpsPlayer::LookEnhancedInput(const FInputActionValue& Value)
 {
-	
+	FVector2d LookValue = Value.Get<FVector2d>();
+	AddControllerYawInput(LookValue.X * MouseSensitivityYaw);
+	AddControllerPitchInput(LookValue.Y * MouseSensitivityPitch);
 }
