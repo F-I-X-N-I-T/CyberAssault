@@ -6,7 +6,9 @@
 #include "GameFramework/Character.h"
 #include "FpsPlayer.generated.h"
 
+struct FInputActionValue;
 class UInputMappingContext;
+class UInputAction;
 
 UCLASS()
 class CYBERASSAULT_API AFpsPlayer : public ACharacter
@@ -23,8 +25,19 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "IMC")
 	UInputMappingContext* InputMappingContext;
-	
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "IMC")
+	UInputAction* MoveAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "IMC")
+	UInputAction* LookAction;
+
+	UFUNCTION()
+	void MoveEnhancedInput(const FInputActionValue& Value);
+
+	UFUNCTION()
+	void LookEnhancedInput(const FInputActionValue& Value);
+	
 private:
 
 	UPROPERTY(EditAnywhere)
@@ -33,26 +46,11 @@ private:
 	UPROPERTY(EditAnywhere)
 	USkeletalMeshComponent* PlayerMesh;
 
-	UFUNCTION()
-	void MoveForward(float Value);
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Player")
+	//float MouseSensitivity = 1.f;
 
-	UFUNCTION()
-	void MoveRight(float Value);
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Player")
-	float MouseSensitivity = 1.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Player")
-	float MouseSensitivityPitch = 1.f;
-	
-	UFUNCTION()
-	void LookUp(float Value);
-
-	UFUNCTION()
-	void TurnRight(float Value);
-
-	UFUNCTION()
-	void PlayerJump();
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Player")
+	//float MouseSensitivityPitch = 1.f;
 
 public:	
 	// Called every frame

@@ -6,6 +6,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "EnhancedInputComponent.h"
 
 // Sets default values
 AFpsPlayer::AFpsPlayer()
@@ -38,20 +39,17 @@ void AFpsPlayer::Tick(float DeltaTime)
 // Called to bind functionality to input
 void AFpsPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	//Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-	//InputComponent->BindAxis("MoveForward", this, &AFpsPlayer::MoveForward);
-	//InputComponent->BindAxis("MoveRight", this, &AFpsPlayer::MoveRight);
-	//InputComponent->BindAxis("LookUp", this, &AFpsPlayer::LookUp);
-	//InputComponent->BindAxis("TurnRight", this, &AFpsPlayer::TurnRight);
-
-	//InputComponent->BindAction("Jump", IE_Pressed, this, &AFpsPlayer::PlayerJump);
-
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{
 		if (UEnhancedInputLocalPlayerSubsystem* SubSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
 		{
 			SubSystem->AddMappingContext(InputMappingContext, 0);
+			
+			if (UEnhancedInputComponent* FPSEnhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent))
+			{
+				FPSEnhancedInput->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AFpsPlayer::MoveEnhancedInput);
+				FPSEnhancedInput->BindAction(LookAction, ETriggerEvent::Triggered, this, &AFpsPlayer::LookEnhancedInput);
+			}
 		}
 	}
 	
@@ -59,30 +57,12 @@ void AFpsPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 
 // Inputs New
 
-
-//Inputs old
-void AFpsPlayer::MoveForward(float Value)
+void AFpsPlayer::MoveEnhancedInput(const FInputActionValue& Value)
 {
-	AddMovementInput(GetActorForwardVector(), Value);
+	
 }
 
-void AFpsPlayer::MoveRight(float Value)
+void AFpsPlayer::LookEnhancedInput(const FInputActionValue& Value)
 {
-	AddMovementInput(GetActorRightVector(), Value);
+	
 }
-
-void AFpsPlayer::LookUp(float Value)
-{
-	AddControllerPitchInput(Value * MouseSensitivityPitch);
-}
-
-void AFpsPlayer::TurnRight(float Value)
-{
-	AddControllerYawInput(Value * MouseSensitivity);
-}
-
-void AFpsPlayer::PlayerJump()
-{
-	Jump();
-}
-//End Inputs
