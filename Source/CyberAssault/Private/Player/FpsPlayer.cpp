@@ -49,6 +49,8 @@ void AFpsPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 			{
 				FPSEnhancedInput->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AFpsPlayer::MoveEnhancedInput);
 				FPSEnhancedInput->BindAction(LookAction, ETriggerEvent::Triggered, this, &AFpsPlayer::LookEnhancedInput);
+				FPSEnhancedInput->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
+				FPSEnhancedInput->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 			}
 		}
 	}

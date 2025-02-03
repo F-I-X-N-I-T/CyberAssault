@@ -32,6 +32,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "IMC")
 	UInputAction* LookAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "IMC")
+	UInputAction* JumpAction;
+
 	UFUNCTION()
 	void MoveEnhancedInput(const FInputActionValue& Value);
 
