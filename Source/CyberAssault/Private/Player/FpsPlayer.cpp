@@ -57,7 +57,7 @@ void AFpsPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	
 }
 
-// Inputs New
+// New Input System
 
 void AFpsPlayer::MoveEnhancedInput(const FInputActionValue& Value)
 {
@@ -72,3 +72,5 @@ void AFpsPlayer::LookEnhancedInput(const FInputActionValue& Value)
 	AddControllerYawInput(LookValue.X * MouseSensitivityYaw);
 	AddControllerPitchInput(LookValue.Y * MouseSensitivityPitch);
 }
+
+// End Input System
