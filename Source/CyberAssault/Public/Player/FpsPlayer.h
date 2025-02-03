@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "FpsPlayer.generated.h"
 
+class UInputMappingContext;
+
 UCLASS()
 class CYBERASSAULT_API AFpsPlayer : public ACharacter
 {
@@ -18,6 +20,10 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere, Category = "IMC")
+	UInputMappingContext* InputMappingContext;
+	
 
 private:
 
