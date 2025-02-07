@@ -53,9 +53,10 @@ void AFpsDoor::BeginPlay()
 
 void AFpsDoor::UpdateDoorLocation(float Value)
 {
-	if (GEngine)
+	FVector NewLocation = FMath::Lerp(DoorInitialLocation, DoorFinalLocation, Value);
+	if (DoorMesh)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Player1 is Active"));
+		DoorMesh->SetRelativeLocation(NewLocation);
 	}
 }
 
@@ -64,7 +65,7 @@ void AFpsDoor::OnDoorBeginOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 {
 	if (OtherActor->ActorHasTag("Player1"))
 	{
-		
+		DoorTimeline->Play();
 	}
 }
 
@@ -73,7 +74,7 @@ void AFpsDoor::OnDoorEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor
 {
 	if (OtherActor->ActorHasTag("Player1"))
 	{
-		
+		DoorTimeline->Reverse();
 	}
 }
 
@@ -81,6 +82,8 @@ void AFpsDoor::OnDoorEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor
 void AFpsDoor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	DoorTimeline->TickComponent(DeltaTime, ELevelTick::LEVELTICK_TimeOnly, nullptr);
 
 }
 
