@@ -63,7 +63,7 @@ void AFpsDoor::UpdateDoorLocation(float Value)
 void AFpsDoor::OnDoorBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (OtherActor->ActorHasTag("Player1"))
+	if (OtherActor && OtherActor->IsA<APawn>() && bIsOpenDoor)
 	{
 		DoorTimeline->Play();
 	}
@@ -72,7 +72,7 @@ void AFpsDoor::OnDoorBeginOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 void AFpsDoor::OnDoorEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	if (OtherActor->ActorHasTag("Player1"))
+	if (OtherActor && OtherActor->IsA<APawn>() && bIsOpenDoor)
 	{
 		DoorTimeline->Reverse();
 	}

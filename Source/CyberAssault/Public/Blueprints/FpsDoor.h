@@ -31,6 +31,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float DoorOpenZ = 350.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsOpenDoor = false;
+
 private:
 
 	//Variables
