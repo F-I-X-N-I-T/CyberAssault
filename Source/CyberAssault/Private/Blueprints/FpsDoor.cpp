@@ -36,18 +36,27 @@ void AFpsDoor::BeginPlay()
 	DoorInitialLocation = DoorMesh->GetRelativeLocation();
 	DoorFinalLocation = DoorInitialLocation + FVector(0.f, 0.f, DoorOpenZ);
 
-	//Binding Function
-	FOnTimelineFloat UpdateFunction;
-	UpdateFunction.BindUFunction(this, FName("UpdateDoorLocation"));
-
 	DoorTrigger->OnComponentBeginOverlap.AddDynamic(this, &AFpsDoor::OnDoorBeginOverlap);
 	DoorTrigger->OnComponentEndOverlap.AddDynamic(this, &AFpsDoor::OnDoorEndOverlap);
+	
+	//Binding Function
+	if (CurveFloat)
+	{
+		FOnTimelineFloat UpdateFunction;
+		UpdateFunction.BindUFunction(this, FName("UpdateDoorLocation"));
+
+		DoorTimeline->AddInterpFloat(CurveFloat, UpdateFunction);
+		DoorTimeline->SetLooping(false);
+	}
 	
 }
 
 void AFpsDoor::UpdateDoorLocation(float Value)
 {
-	
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Player1 is Active"));
+	}
 }
 
 void AFpsDoor::OnDoorBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -55,10 +64,7 @@ void AFpsDoor::OnDoorBeginOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 {
 	if (OtherActor->ActorHasTag("Player1"))
 	{
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Player1 is overlapping the door"));
-		}
+		
 	}
 }
 
@@ -67,10 +73,7 @@ void AFpsDoor::OnDoorEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor
 {
 	if (OtherActor->ActorHasTag("Player1"))
 	{
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Player1 is overlapping the door"));
-		}
+		
 	}
 }
 
