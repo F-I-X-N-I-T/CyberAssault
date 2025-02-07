@@ -41,6 +41,12 @@ private:
 	FVector DoorFinalLocation;
 	//End Variables
 
+	//Functions
+	UFUNCTION()
+	void UpdateDoorLocation(float Value);
+	
+	//End Functions
+
 	//Components
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
 	USceneComponent* Root;

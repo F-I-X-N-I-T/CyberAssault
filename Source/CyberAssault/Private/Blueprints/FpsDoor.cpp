@@ -35,6 +35,15 @@ void AFpsDoor::BeginPlay()
 
 	DoorInitialLocation = GetActorLocation();
 	DoorFinalLocation = DoorInitialLocation + FVector(0.f, 0.f, DoorOpenZ);
+
+	//Binding Function
+	FOnTimelineFloat UpdateFunction;
+	UpdateFunction.BindUFunction(this, FName("UpdateDoorLocation"));
+	
+}
+
+void AFpsDoor::UpdateDoorLocation(float Value)
+{
 	
 }
 
