@@ -5,6 +5,7 @@
 
 #include "Components/BoxComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Player/FpsPlayer.h"
 
 // Sets default values
 AFpsKeyPad::AFpsKeyPad()
@@ -19,6 +20,7 @@ AFpsKeyPad::AFpsKeyPad()
 	KeyPadMesh->SetupAttachment(RootScene);
 
 	KeyPadTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("KeyPadTrigger"));
+	KeyPadTrigger->SetupAttachment(RootScene);
 
 	KeyPadWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("KeyPadWidget"));
 	KeyPadWidget->SetupAttachment(RootScene);
@@ -33,19 +35,28 @@ void AFpsKeyPad::BeginPlay()
 	//Binding Functions box collision
 	KeyPadTrigger->OnComponentBeginOverlap.AddDynamic(this, &AFpsKeyPad::OnKeyPadBeginOverlap);
 	KeyPadTrigger->OnComponentEndOverlap.AddDynamic(this, &AFpsKeyPad::OnKeyPadEndOverlap);
+	KeyPadWidget->SetVisibility(false);
 	
 }
 
 void AFpsKeyPad::OnKeyPadBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	
+	AFpsPlayer* OverlapActor = Cast<AFpsPlayer>(OtherActor);
+	if (OverlapActor)
+	{
+		KeyPadWidget->SetVisibility(true);
+	}
 }
 
 void AFpsKeyPad::OnKeyPadEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	
+	AFpsPlayer* OverlapActor = Cast<AFpsPlayer>(OtherActor);
+	if (OverlapActor)
+	{
+		KeyPadWidget->SetVisibility(false);
+	}
 }
 
 // Called every frame
