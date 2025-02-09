@@ -45,7 +45,16 @@ void AFpsKeyPad::OnKeyPadBeginOverlap(UPrimitiveComponent* OverlappedComponent, 
 	AFpsPlayer* OverlapActor = Cast<AFpsPlayer>(OtherActor);
 	if (OverlapActor)
 	{
-		KeyPadWidget->SetVisibility(true);
+		UUserWidget* Widgetbp = KeyPadWidget->GetUserWidgetObject();
+		if (Widgetbp)
+		{
+			UFunction* ShowText = Widgetbp->FindFunction(FName("ShowText"));
+			if (ShowText)
+			{
+				Widgetbp->ProcessEvent(ShowText, nullptr);
+				KeyPadWidget->SetVisibility(true);
+			}
+		}
 	}
 }
 
@@ -55,7 +64,15 @@ void AFpsKeyPad::OnKeyPadEndOverlap(UPrimitiveComponent* OverlappedComponent, AA
 	AFpsPlayer* OverlapActor = Cast<AFpsPlayer>(OtherActor);
 	if (OverlapActor)
 	{
-		KeyPadWidget->SetVisibility(false);
+		UUserWidget* Widgetbp = KeyPadWidget->GetUserWidgetObject();
+		if (Widgetbp)
+		{
+			UFunction* HideText = Widgetbp->FindFunction(FName("HideText"));
+			if (HideText)
+			{
+				Widgetbp->ProcessEvent(HideText, nullptr);
+			}
+		}
 	}
 }
 
