@@ -60,7 +60,7 @@ private:
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
 	USceneComponent* Root;
 	
-	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* DoorMesh;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
