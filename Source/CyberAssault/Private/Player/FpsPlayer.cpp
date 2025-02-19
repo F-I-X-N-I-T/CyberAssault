@@ -51,6 +51,7 @@ void AFpsPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 				FPSEnhancedInput->BindAction(LookAction, ETriggerEvent::Triggered, this, &AFpsPlayer::LookEnhancedInput);
 				FPSEnhancedInput->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 				FPSEnhancedInput->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
+				FPSEnhancedInput->BindAction(InteractAction, ETriggerEvent::Started, this, &AFpsPlayer::InteractEnhancedInput);
 			}
 		}
 	}
@@ -71,6 +72,14 @@ void AFpsPlayer::LookEnhancedInput(const FInputActionValue& Value)
 	FVector2d LookValue = Value.Get<FVector2d>();
 	AddControllerYawInput(LookValue.X * MouseSensitivityYaw);
 	AddControllerPitchInput(LookValue.Y * MouseSensitivityPitch);
+}
+
+void AFpsPlayer::InteractEnhancedInput(const FInputActionValue& Value)
+{
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Interact"));
+	}
 }
 
 // End Input System

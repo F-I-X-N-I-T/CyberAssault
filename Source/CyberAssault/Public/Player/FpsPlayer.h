@@ -35,11 +35,17 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "IMC")
 	UInputAction* JumpAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "IMC")
+	UInputAction* InteractAction;
+
 	UFUNCTION()
 	void MoveEnhancedInput(const FInputActionValue& Value);
 
 	UFUNCTION()
 	void LookEnhancedInput(const FInputActionValue& Value);
+
+	UFUNCTION()
+	void InteractEnhancedInput(const FInputActionValue& Value);
 	
 private:
 
