@@ -74,3 +74,15 @@ void AFpsPlayer::LookEnhancedInput(const FInputActionValue& Value)
 }
 
 // End Input System
+
+// Line Trace
+
+void AFpsPlayer::LineTrace()
+{
+	FHitResult HitResult;
+	GetWorld()->LineTraceSingleByChannel(HitResult, CameraComponent->GetComponentLocation(),
+		CameraComponent->GetComponentLocation() + CameraComponent->GetForwardVector() * LineTraceDistance,
+		ECollisionChannel::ECC_Visibility);
+}
+
+// End Line Trace

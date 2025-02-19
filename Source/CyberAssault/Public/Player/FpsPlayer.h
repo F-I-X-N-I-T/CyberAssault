@@ -43,7 +43,7 @@ protected:
 	
 private:
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* CameraComponent;
 
 	UPROPERTY(EditAnywhere)
@@ -54,6 +54,13 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Player")
 	float MouseSensitivityPitch = 1.f;
+
+	// Line Trace
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Player")
+	float LineTraceDistance = 150.f;
+
+	UFUNCTION()
+	void LineTrace();
 
 public:	
 	// Called every frame
