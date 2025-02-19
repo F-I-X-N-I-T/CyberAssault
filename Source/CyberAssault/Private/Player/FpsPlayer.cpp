@@ -33,7 +33,7 @@ void AFpsPlayer::BeginPlay()
 void AFpsPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	LineTrace();
 }
 
 // Called to bind functionality to input
@@ -83,6 +83,11 @@ void AFpsPlayer::LineTrace()
 	GetWorld()->LineTraceSingleByChannel(HitResult, CameraComponent->GetComponentLocation(),
 		CameraComponent->GetComponentLocation() + CameraComponent->GetForwardVector() * LineTraceDistance,
 		ECollisionChannel::ECC_Visibility);
+
+	if (HitResult.bBlockingHit)
+	{
+		
+	}
 }
 
 // End Line Trace

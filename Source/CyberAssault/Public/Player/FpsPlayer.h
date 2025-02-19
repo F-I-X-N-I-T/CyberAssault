@@ -57,7 +57,7 @@ private:
 
 	// Line Trace
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Player")
-	float LineTraceDistance = 150.f;
+	float LineTraceDistance = 200.f;
 
 	UFUNCTION()
 	void LineTrace();
