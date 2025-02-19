@@ -76,9 +76,16 @@ void AFpsPlayer::LookEnhancedInput(const FInputActionValue& Value)
 
 void AFpsPlayer::InteractEnhancedInput(const FInputActionValue& Value)
 {
-	if (GEngine)
+	if (LineTraceHitResult.bBlockingHit)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Interact"));
+		if (AActor* HitActor = LineTraceHitResult.GetActor())
+		{
+			FString ActorName = HitActor->GetName();
+			if (GEngine)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Hit Actor: %s"), *ActorName));
+			}
+		}
 	}
 }
 
@@ -88,12 +95,11 @@ void AFpsPlayer::InteractEnhancedInput(const FInputActionValue& Value)
 
 void AFpsPlayer::LineTrace()
 {
-	FHitResult HitResult;
-	GetWorld()->LineTraceSingleByChannel(HitResult, CameraComponent->GetComponentLocation(),
+	GetWorld()->LineTraceSingleByChannel(LineTraceHitResult, CameraComponent->GetComponentLocation(),
 		CameraComponent->GetComponentLocation() + CameraComponent->GetForwardVector() * LineTraceDistance,
 		ECollisionChannel::ECC_Visibility);
 
-	if (HitResult.bBlockingHit)
+	if (LineTraceHitResult.bBlockingHit)
 	{
 		
 	}
