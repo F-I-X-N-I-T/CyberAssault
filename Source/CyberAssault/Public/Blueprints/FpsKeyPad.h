@@ -4,13 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Interface/FpsInterface.h"
 #include "FpsKeyPad.generated.h"
 
 class UBoxComponent;
 class UWidgetComponent;
 
 UCLASS()
-class CYBERASSAULT_API AFpsKeyPad : public AActor
+class CYBERASSAULT_API AFpsKeyPad : public AActor, public IFpsInterface
 {
 	GENERATED_BODY()
 	

@@ -7,6 +7,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Interface/FpsInterface.h"
 
 // Sets default values
 AFpsPlayer::AFpsPlayer()
@@ -80,10 +81,9 @@ void AFpsPlayer::InteractEnhancedInput(const FInputActionValue& Value)
 	{
 		if (AActor* HitActor = LineTraceHitResult.GetActor())
 		{
-			FString ActorName = HitActor->GetName();
-			if (GEngine)
+			if (IFpsInterface* ImplementedActor = Cast<IFpsInterface>(HitActor))
 			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Hit Actor: %s"), *ActorName));
+				ImplementedActor->Execute_PlayerInteract(HitActor);
 			}
 		}
 	}
@@ -99,10 +99,10 @@ void AFpsPlayer::LineTrace()
 		CameraComponent->GetComponentLocation() + CameraComponent->GetForwardVector() * LineTraceDistance,
 		ECollisionChannel::ECC_Visibility);
 
-	if (LineTraceHitResult.bBlockingHit)
+	/***if (LineTraceHitResult.bBlockingHit)
 	{
-		
-	}
+		Debug xd
+	}***/
 }
 
 // End Line Trace

@@ -4,13 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Interface/FpsInterface.h"
 #include "FpsDoor.generated.h"
 
 class UTimelineComponent;
 class UBoxComponent;
 
 UCLASS()
-class CYBERASSAULT_API AFpsDoor : public AActor
+class CYBERASSAULT_API AFpsDoor : public AActor, public IFpsInterface
 {
 	GENERATED_BODY()
 	
