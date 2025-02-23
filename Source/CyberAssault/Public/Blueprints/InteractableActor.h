@@ -1,0 +1,46 @@
+// RIGHTS RESERVED FOR FIXNIT IN THE DEVELOPMENT OF THIS VIDEOGAME. 
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameFramework/Actor.h"
+#include "Interface/FpsInterface.h"
+#include "InteractableActor.generated.h"
+
+class UWidgetComponent;
+class UBoxComponent;
+
+UCLASS()
+class CYBERASSAULT_API AInteractableActor : public AActor, public IFpsInterface
+{
+	GENERATED_BODY()
+	
+public:	
+	// Sets default values for this actor's properties
+	AInteractableActor();
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+private:
+	//Variables
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,meta = (AllowPrivateAccess = "true"))
+	USceneComponent* RootMeshComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,meta = (AllowPrivateAccess = "true"))
+	UStaticMeshComponent* InteractableMeshComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	UBoxComponent* BoxTrigger;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,meta = (AllowPrivateAccess = "true"))
+	UWidgetComponent* InteractableWidgetComponent;
+
+	//Functions
+
+public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+};
