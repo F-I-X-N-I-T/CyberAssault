@@ -19,12 +19,17 @@ public:
 	// Sets default values for this actor's properties
 	AFpsKeyPad();
 
+	//Interface
+	virtual void PlayerInteract_Implementation() override;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:
 	//Variables
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	bool bDoorIsOpened = false;
 
 	//Mesh
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
@@ -47,7 +52,9 @@ private:
 
 	UFUNCTION()
 	void OnKeyPadEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-	
+
+	UFUNCTION()
+	void DoorIsOpenedFunction();
 	
 public:	
 	// Called every frame

@@ -28,6 +28,12 @@ AFpsKeyPad::AFpsKeyPad()
 
 }
 
+void AFpsKeyPad::PlayerInteract_Implementation()
+{
+	IFpsInterface::PlayerInteract_Implementation();
+	DoorIsOpenedFunction();
+}
+
 // Called when the game starts or when spawned
 void AFpsKeyPad::BeginPlay()
 {
@@ -74,6 +80,11 @@ void AFpsKeyPad::OnKeyPadEndOverlap(UPrimitiveComponent* OverlappedComponent, AA
 			}
 		}
 	}
+}
+
+void AFpsKeyPad::DoorIsOpenedFunction()
+{
+	bDoorIsOpened = true;
 }
 
 // Called every frame
