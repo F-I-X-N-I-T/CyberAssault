@@ -27,7 +27,6 @@ AInteractableActor::AInteractableActor()
 	InteractableWidgetComponent->SetupAttachment(RootMeshComponent);
 
 	//Binding
-	BoxTrigger->OnComponentBeginOverlap.AddDynamic(this, &AInteractableActor::OnInteractableBeginOverlap);
 	BoxTrigger->OnComponentEndOverlap.AddDynamic(this, &AInteractableActor::OnInteractableEndOverlap);
 
 }
@@ -48,21 +47,17 @@ void AInteractableActor::PlayerInteract_Implementation()
 	}
 }
 
-void AInteractableActor::OnInteractableBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-                                                    UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AInteractableActor::ShowMessage_Implementation()
 {
-	AFpsPlayer* OverlapActor = Cast<AFpsPlayer>(OtherActor);
-	if (OverlapActor)
+	IFpsInterface::ShowMessage_Implementation();
+	UUserWidget* Widgetbp = InteractableWidgetComponent->GetUserWidgetObject();
+	if (Widgetbp)
 	{
-		UUserWidget* Widgetbp = InteractableWidgetComponent->GetUserWidgetObject();
-		if (Widgetbp)
+		UFunction* ShowText = Widgetbp->FindFunction(FName("ShowText"));
+		if (ShowText)
 		{
-			UFunction* ShowText = Widgetbp->FindFunction(FName("ShowText"));
-			if (ShowText)
-			{
-				Widgetbp->ProcessEvent(ShowText, nullptr);
-				InteractableWidgetComponent->SetVisibility(true);
-			}
+			Widgetbp->ProcessEvent(ShowText, nullptr);
+			InteractableWidgetComponent->SetVisibility(true);
 		}
 	}
 }

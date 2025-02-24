@@ -70,6 +70,9 @@ private:
 
 	FHitResult LineTraceHitResult;
 
+	UFUNCTION()
+	void PlayerShowMessage();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

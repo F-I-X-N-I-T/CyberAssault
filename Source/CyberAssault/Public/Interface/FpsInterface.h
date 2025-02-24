@@ -28,4 +28,10 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void InternalInteract();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void ShowMessage();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void HideMessage();
 };

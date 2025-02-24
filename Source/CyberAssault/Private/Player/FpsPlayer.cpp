@@ -98,11 +98,18 @@ void AFpsPlayer::LineTrace()
 	GetWorld()->LineTraceSingleByChannel(LineTraceHitResult, CameraComponent->GetComponentLocation(),
 		CameraComponent->GetComponentLocation() + CameraComponent->GetForwardVector() * LineTraceDistance,
 		ECollisionChannel::ECC_Visibility);
-
-	/***if (LineTraceHitResult.bBlockingHit)
+	if (LineTraceHitResult.bBlockingHit)
 	{
-		Debug xd
-	}***/
+		PlayerShowMessage();
+	}
+}
+
+void AFpsPlayer::PlayerShowMessage()
+{
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Player is looking at an interactable object"));
+	}
 }
 
 // End Line Trace
