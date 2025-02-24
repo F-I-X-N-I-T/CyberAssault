@@ -106,9 +106,12 @@ void AFpsPlayer::LineTrace()
 
 void AFpsPlayer::PlayerShowMessage()
 {
-	if (GEngine)
+	if (AActor* HitActor = LineTraceHitResult.GetActor())
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Player is looking at an interactable object"));
+		if (IFpsInterface* ActorInterface = Cast<IFpsInterface>(HitActor))
+		{
+			ActorInterface->Execute_ShowMessage(HitActor);
+		}
 	}
 }
 

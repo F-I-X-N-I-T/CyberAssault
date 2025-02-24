@@ -50,8 +50,7 @@ void AInteractableActor::PlayerInteract_Implementation()
 void AInteractableActor::ShowMessage_Implementation()
 {
 	IFpsInterface::ShowMessage_Implementation();
-	UUserWidget* Widgetbp = InteractableWidgetComponent->GetUserWidgetObject();
-	if (Widgetbp)
+	if (UUserWidget* Widgetbp = InteractableWidgetComponent->GetUserWidgetObject())
 	{
 		UFunction* ShowText = Widgetbp->FindFunction(FName("ShowText"));
 		if (ShowText)
