@@ -31,6 +31,12 @@ AFpsKeyPad::AFpsKeyPad()
 void AFpsKeyPad::PlayerInteract_Implementation()
 {
 	IFpsInterface::PlayerInteract_Implementation();
+	//DoorIsOpenedFunction();
+}
+
+void AFpsKeyPad::InternalInteract_Implementation()
+{
+	IFpsInterface::InternalInteract_Implementation();
 	DoorIsOpenedFunction();
 }
 

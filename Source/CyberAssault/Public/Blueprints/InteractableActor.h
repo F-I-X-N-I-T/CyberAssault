@@ -7,6 +7,7 @@
 #include "Interface/FpsInterface.h"
 #include "InteractableActor.generated.h"
 
+class AFpsKeyPad;
 class UWidgetComponent;
 class UBoxComponent;
 
@@ -25,6 +26,10 @@ protected:
 
 	//Interface
 	virtual void PlayerInteract_Implementation() override;
+
+	// ref to keypad public
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	AFpsKeyPad* KeyPadRef;
 
 private:
 	//Variables

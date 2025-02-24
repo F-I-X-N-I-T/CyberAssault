@@ -3,6 +3,7 @@
 
 #include "Blueprints/InteractableActor.h"
 
+#include "Blueprints/FpsKeyPad.h"
 #include "Components/BoxComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Player/FpsPlayer.h"
@@ -41,9 +42,9 @@ void AInteractableActor::BeginPlay()
 void AInteractableActor::PlayerInteract_Implementation()
 {
 	IFpsInterface::PlayerInteract_Implementation();
-	if (GEngine)
+	if (IFpsInterface* ImplementInterface = Cast<IFpsInterface>(this))
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Interacted with Interactable Actor"));
+		ImplementInterface->Execute_InternalInteract(KeyPadRef);
 	}
 }
 

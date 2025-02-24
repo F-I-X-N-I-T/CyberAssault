@@ -25,4 +25,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void PlayerInteract();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void InternalInteract();
 };

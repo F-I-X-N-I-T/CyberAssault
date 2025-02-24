@@ -21,6 +21,7 @@ public:
 
 	//Interface
 	virtual void PlayerInteract_Implementation() override;
+	virtual void InternalInteract_Implementation() override;
 
 protected:
 	// Called when the game starts or when spawned
