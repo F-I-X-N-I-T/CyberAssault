@@ -95,12 +95,30 @@ void AFpsPlayer::InteractEnhancedInput(const FInputActionValue& Value)
 
 void AFpsPlayer::LineTrace()
 {
+	if (AActor* HitActor = LineTraceHitResult.GetActor())
+	{
+		if (IFpsInterface* ActorInterface = Cast<IFpsInterface>(HitActor))
+		{
+			CachedHitActor = HitActor;
+		}
+		else
+		{
+			PlayerHideShowMessage();
+		}
+	}
+
+	
 	GetWorld()->LineTraceSingleByChannel(LineTraceHitResult, CameraComponent->GetComponentLocation(),
 		CameraComponent->GetComponentLocation() + CameraComponent->GetForwardVector() * LineTraceDistance,
 		ECollisionChannel::ECC_Visibility);
+	
 	if (LineTraceHitResult.bBlockingHit)
 	{
 		PlayerShowMessage();
+	}
+	else
+	{
+		PlayerHideShowMessage();
 	}
 }
 
@@ -112,6 +130,14 @@ void AFpsPlayer::PlayerShowMessage()
 		{
 			ActorInterface->Execute_ShowMessage(HitActor);
 		}
+	}
+}
+
+void AFpsPlayer::PlayerHideShowMessage()
+{
+	if (IFpsInterface* ActorInterface = Cast<IFpsInterface>(CachedHitActor))
+	{
+		ActorInterface->Execute_HideMessage(CachedHitActor);
 	}
 }
 

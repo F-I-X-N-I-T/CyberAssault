@@ -6,7 +6,6 @@
 #include "Blueprints/FpsKeyPad.h"
 #include "Components/BoxComponent.h"
 #include "Components/WidgetComponent.h"
-#include "Player/FpsPlayer.h"
 
 // Sets default values
 AInteractableActor::AInteractableActor()
@@ -25,9 +24,6 @@ AInteractableActor::AInteractableActor()
 
 	InteractableWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("InteractableWidgetComponent"));
 	InteractableWidgetComponent->SetupAttachment(RootMeshComponent);
-
-	//Binding
-	BoxTrigger->OnComponentEndOverlap.AddDynamic(this, &AInteractableActor::OnInteractableEndOverlap);
 
 }
 
@@ -52,33 +48,24 @@ void AInteractableActor::ShowMessage_Implementation()
 	IFpsInterface::ShowMessage_Implementation();
 	if (UUserWidget* Widgetbp = InteractableWidgetComponent->GetUserWidgetObject())
 	{
-		UFunction* ShowText = Widgetbp->FindFunction(FName("ShowText"));
-		if (ShowText)
+		if (UFunction* ShowText = Widgetbp->FindFunction(FName("ShowText")))
 		{
 			Widgetbp->ProcessEvent(ShowText, nullptr);
-			InteractableWidgetComponent->SetVisibility(true);
 		}
 	}
 }
 
-void AInteractableActor::OnInteractableEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void AInteractableActor::HideMessage_Implementation()
 {
-	AFpsPlayer* OverlapActor = Cast<AFpsPlayer>(OtherActor);
-	if (OverlapActor)
+	IFpsInterface::HideMessage_Implementation();
+	if (UUserWidget* Widgetbp = InteractableWidgetComponent->GetUserWidgetObject())
 	{
-		UUserWidget* Widgetbp = InteractableWidgetComponent->GetUserWidgetObject();
-		if (Widgetbp)
+		if (UFunction* HideText = Widgetbp->FindFunction(FName("HideText")))
 		{
-			UFunction* HideText = Widgetbp->FindFunction(FName("HideText"));
-			if (HideText)
-			{
-				Widgetbp->ProcessEvent(HideText, nullptr);
-			}
+			Widgetbp->ProcessEvent(HideText, nullptr);
 		}
 	}
 }
-
 
 // Called every frame
 void AInteractableActor::Tick(float DeltaTime)

@@ -63,7 +63,7 @@ private:
 
 	// Line Trace
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Player")
-	float LineTraceDistance = 200.f;
+	float LineTraceDistance = 300.f;
 
 	UFUNCTION()
 	void LineTrace();
@@ -72,6 +72,12 @@ private:
 
 	UFUNCTION()
 	void PlayerShowMessage();
+
+	UFUNCTION()
+	void PlayerHideShowMessage();
+
+	UPROPERTY()
+	AActor* CachedHitActor;
 
 public:	
 	// Called every frame

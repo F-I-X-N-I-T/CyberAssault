@@ -27,6 +27,7 @@ protected:
 	//Interface
 	virtual void PlayerInteract_Implementation() override;
 	virtual void ShowMessage_Implementation() override;
+	virtual void HideMessage_Implementation() override;
 
 	// ref to keypad public
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -47,8 +48,6 @@ private:
 	UWidgetComponent* InteractableWidgetComponent;
 
 	//Functions
-	UFUNCTION()
-	void OnInteractableEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 public:	
 	// Called every frame
