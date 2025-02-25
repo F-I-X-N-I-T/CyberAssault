@@ -19,8 +19,8 @@ AFpsKeyPad::AFpsKeyPad()
 	KeyPadMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("KeyPadMesh"));
 	KeyPadMesh->SetupAttachment(RootScene);
 
-	KeyPadTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("KeyPadTrigger"));
-	KeyPadTrigger->SetupAttachment(RootScene);
+	//KeyPadTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("KeyPadTrigger"));
+	//KeyPadTrigger->SetupAttachment(RootScene);
 
 	KeyPadWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("KeyPadWidget"));
 	KeyPadWidget->SetupAttachment(RootScene);
@@ -44,46 +44,30 @@ void AFpsKeyPad::InternalInteract_Implementation()
 void AFpsKeyPad::BeginPlay()
 {
 	Super::BeginPlay();
-	//Binding Functions box collision
-	KeyPadTrigger->OnComponentBeginOverlap.AddDynamic(this, &AFpsKeyPad::OnKeyPadBeginOverlap);
-	KeyPadTrigger->OnComponentEndOverlap.AddDynamic(this, &AFpsKeyPad::OnKeyPadEndOverlap);
-	KeyPadWidget->SetVisibility(false);
 	
 }
 
-void AFpsKeyPad::OnKeyPadBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AFpsKeyPad::ShowMessage_Implementation()
 {
-	AFpsPlayer* OverlapActor = Cast<AFpsPlayer>(OtherActor);
-	if (OverlapActor)
+	IFpsInterface::ShowMessage_Implementation();
+	if (UUserWidget* Widgetbp = KeyPadWidget->GetUserWidgetObject())
 	{
-		UUserWidget* Widgetbp = KeyPadWidget->GetUserWidgetObject();
-		if (Widgetbp)
+		if (UFunction* ShowText = Widgetbp->FindFunction(FName("ShowText")))
 		{
-			UFunction* ShowText = Widgetbp->FindFunction(FName("ShowText"));
-			if (ShowText)
-			{
-				Widgetbp->ProcessEvent(ShowText, nullptr);
-				KeyPadWidget->SetVisibility(true);
-			}
+			Widgetbp->ProcessEvent(ShowText, nullptr);
 		}
 	}
 }
 
-void AFpsKeyPad::OnKeyPadEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void AFpsKeyPad::HideMessage_Implementation()
 {
-	AFpsPlayer* OverlapActor = Cast<AFpsPlayer>(OtherActor);
-	if (OverlapActor)
+	IFpsInterface::HideMessage_Implementation();
+	IFpsInterface::HideMessage_Implementation();
+	if (UUserWidget* Widgetbp = KeyPadWidget->GetUserWidgetObject())
 	{
-		UUserWidget* Widgetbp = KeyPadWidget->GetUserWidgetObject();
-		if (Widgetbp)
+		if (UFunction* HideText = Widgetbp->FindFunction(FName("HideText")))
 		{
-			UFunction* HideText = Widgetbp->FindFunction(FName("HideText"));
-			if (HideText)
-			{
-				Widgetbp->ProcessEvent(HideText, nullptr);
-			}
+			Widgetbp->ProcessEvent(HideText, nullptr);
 		}
 	}
 }

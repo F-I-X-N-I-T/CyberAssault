@@ -22,6 +22,8 @@ public:
 	//Interface
 	virtual void PlayerInteract_Implementation() override;
 	virtual void InternalInteract_Implementation() override;
+	virtual void ShowMessage_Implementation() override;
+	virtual void HideMessage_Implementation() override;
 
 protected:
 	// Called when the game starts or when spawned
@@ -40,19 +42,12 @@ private:
 	UStaticMeshComponent* KeyPadMesh;
 
 	//Box Collision
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	UBoxComponent* KeyPadTrigger;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	//UBoxComponent* KeyPadTrigger;
 
 	//Widget
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	UWidgetComponent* KeyPadWidget;
-
-	//Overlapping
-	UFUNCTION()
-	void OnKeyPadBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-	UFUNCTION()
-	void OnKeyPadEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	UFUNCTION()
 	void DoorIsOpenedFunction();
