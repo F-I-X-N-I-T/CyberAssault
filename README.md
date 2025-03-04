@@ -16,11 +16,11 @@
 - Note: Export the animations only to the Characters , Weapons folder of the Lyra project, once exported they must be moved to the main folder. And in the Content folder, leave the Audio and Effects folder.
 ---
 ## NOTES
-- Note 1: settings used for the use of some options disabled in the editor. Build lighting only: To use “Build lighting only” you have to activate “Allow Static Lighting” in Project Settings>Engine>Rendering.\
+- Note 1: settings used for the use of some options disabled in the editor. Build lighting only: To use “Build lighting only” you have to activate “Allow Static Lighting” in Project Settings>Engine>Rendering.
 
 - Note 2: The following options are changed to cast only the shadows of a mesh that is required to be invisible but with shadows.
 Go to Details in the mesh
 Hidden Shadow = true 
 Hidden in Game = true 
-At startup these will be set to false, they should be changed to true, this fixes the error “your scene contains a skydome mesh with a sky material but it does not cover that part of the screen” along with the mesh remaining solid black.\
+At startup these will be set to false, they should be changed to true, this fixes the error “your scene contains a skydome mesh with a sky material but it does not cover that part of the screen” along with the mesh remaining solid black.
 ---
