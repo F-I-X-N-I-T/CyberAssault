@@ -25,5 +25,5 @@ Hidden Shadow = true
 Hidden in Game = true 
 At startup these will be set to false, they should be changed to true, this fixes the error “your scene contains a skydome mesh with a sky material but it does not cover that part of the screen” along with the mesh remaining solid black.
 
--Note 3: To solve the error “your scene contains a skydome mesh with a sky material but it does not cover that part of the screen” you must use Render in Depth Pass = false, Render in main pass = false, as additional you must rebuild the whole Env. Light.
+- Note 3: To solve the error “your scene contains a skydome mesh with a sky material but it does not cover that part of the screen” you must use Render in Depth Pass = false, Render in main pass = false, as additional you must rebuild the whole Env. Light.
 ---
