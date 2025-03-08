@@ -73,6 +73,7 @@ void AFpsPlayer::LookEnhancedInput(const FInputActionValue& Value)
 	FVector2d LookValue = Value.Get<FVector2d>();
 	AddControllerYawInput(LookValue.X * MouseSensitivityYaw);
 	AddControllerPitchInput(LookValue.Y * MouseSensitivityPitch);
+	Pitch = LookValue.Y;
 }
 
 void AFpsPlayer::InteractEnhancedInput(const FInputActionValue& Value)
