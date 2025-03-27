@@ -15,6 +15,12 @@
 - Ruta: /All/Game/Main/Characters   /All/Game/Main/Weapons
 - Note: Export the animations only to the Characters , Weapons folder of the Lyra project, once exported they must be moved to the main folder. And in the Content folder, leave the Audio and Effects folder.
 ---
+- Name: Polar Sci-Fi Facility
+- User: 3DBrushwork
+- Link: https://www.fab.com/listings/58f90d16-1b28-420c-a4bd-2833fee73554
+- Ruta: /All/Game/Main/Polar
+---
+
 ## NOTES
 - Note 1: settings used for the use of some options disabled in the editor. Build lighting only: To use “Build lighting only” you have to activate “Allow Static Lighting” in Project Settings>Engine>Rendering.
 
