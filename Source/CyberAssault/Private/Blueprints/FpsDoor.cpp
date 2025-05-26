@@ -5,6 +5,8 @@
 
 #include "Components/BoxComponent.h"
 #include "Components/TimelineComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "Sound/SoundCue.h"
 
 // Sets default values
 AFpsDoor::AFpsDoor()
@@ -38,6 +40,8 @@ void AFpsDoor::BeginPlay()
 
 	DoorTrigger->OnComponentBeginOverlap.AddDynamic(this, &AFpsDoor::OnDoorBeginOverlap);
 	DoorTrigger->OnComponentEndOverlap.AddDynamic(this, &AFpsDoor::OnDoorEndOverlap);
+
+	DoorSoundLocation = GetActorLocation();
 	
 	//Binding Function
 	if (CurveFloat)
@@ -66,6 +70,7 @@ void AFpsDoor::OnDoorBeginOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 	if (OtherActor && OtherActor->IsA<APawn>() && bIsOpenDoor)
 	{
 		DoorTimeline->Play();
+		UGameplayStatics::PlaySoundAtLocation(this, DoorSound, DoorSoundLocation);
 	}
 }
 
@@ -75,6 +80,7 @@ void AFpsDoor::OnDoorEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor
 	if (OtherActor && OtherActor->IsA<APawn>() && bIsOpenDoor)
 	{
 		DoorTimeline->Reverse();
+		UGameplayStatics::PlaySoundAtLocation(this, DoorSound, DoorSoundLocation);
 	}
 }
 

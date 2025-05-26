@@ -68,6 +68,13 @@ private:
 	UBoxComponent* DoorTrigger;
 	//End Components
 
+	//Sounds
+	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
+	USoundCue* DoorSound;
+
+	FVector DoorSoundLocation;
+	//End Sounds
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
