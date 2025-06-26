@@ -7,6 +7,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Interface/FpsInterface.h"
 
 // Sets default values
@@ -17,9 +18,13 @@ AFpsPlayer::AFpsPlayer()
 	
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraPlayer"));
 	CameraComponent->SetupAttachment(RootComponent);
+	CameraComponent->bUsePawnControlRotation = true;
+	
+	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
+	SpringArm->SetupAttachment(CameraComponent);
 
 	PlayerMesh = ACharacter::GetMesh();
-	PlayerMesh->SetupAttachment(CameraComponent);
+	PlayerMesh->SetupAttachment(SpringArm);
 
 }
 

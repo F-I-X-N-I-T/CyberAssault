@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "FpsPlayer.generated.h"
 
+class USpringArmComponent;
 struct FInputActionValue;
 class UInputMappingContext;
 class UInputAction;
@@ -54,6 +55,9 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	USkeletalMeshComponent* PlayerMesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	USpringArmComponent* SpringArm;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Player")
 	float MouseSensitivityYaw = 1.f;
