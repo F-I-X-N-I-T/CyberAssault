@@ -13,6 +13,9 @@ Content/Main/Polar
 Content/Polar
 Content/Audio
 Content/Effects
+Content/Main/Maps/SciFi_MapGameA_BuiltData.uasset
+Content/Main/Maps/SciFi_MapGameB_Streaming_BuiltData.uasset
+Content/Main/Maps/SciFi_MapGameC_Streaming_BuiltData.uasset
 
 .idea
 .vscode
