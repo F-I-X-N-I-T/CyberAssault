@@ -5,6 +5,7 @@
 
 #include "Components/BoxComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Player/FpsPlayer.h"
 
 // Sets default values
@@ -32,6 +33,10 @@ void AFpsKeyPad::PlayerInteract_Implementation()
 {
 	IFpsInterface::PlayerInteract_Implementation();
 	//DoorIsOpenedFunction();
+	if (BeepSoundKeyPad)
+	{
+		UGameplayStatics::PlaySound2D(this, BeepSoundKeyPad);
+	}
 }
 
 void AFpsKeyPad::InternalInteract_Implementation()

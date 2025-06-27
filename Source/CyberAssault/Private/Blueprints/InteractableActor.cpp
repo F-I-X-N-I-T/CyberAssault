@@ -6,6 +6,7 @@
 #include "Blueprints/FpsKeyPad.h"
 #include "Components/BoxComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AInteractableActor::AInteractableActor()
@@ -40,6 +41,10 @@ void AInteractableActor::PlayerInteract_Implementation()
 	if (IFpsInterface* ImplementInterface = Cast<IFpsInterface>(this))
 	{
 		ImplementInterface->Execute_InternalInteract(KeyPadRef);
+		if (BeepSoundLaptop)
+		{
+			UGameplayStatics::PlaySound2D(this, BeepSoundLaptop);
+		}
 	}
 }
 

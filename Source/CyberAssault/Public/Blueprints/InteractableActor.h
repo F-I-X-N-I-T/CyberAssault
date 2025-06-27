@@ -47,6 +47,9 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite,meta = (AllowPrivateAccess = "true"))
 	UWidgetComponent* InteractableWidgetComponent;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,meta = (AllowPrivateAccess = "true"))
+	USoundBase* BeepSoundLaptop;
+
 	//Functions
 
 public:	
