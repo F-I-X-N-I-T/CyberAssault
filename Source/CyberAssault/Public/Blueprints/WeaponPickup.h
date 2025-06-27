@@ -36,6 +36,10 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite,meta = (AllowPrivateAccess = "true"))
 	USkeletalMeshComponent* SkeletalMeshComponent;
 
+	// Collision Box; It is not supposed to have the box collision at this point,
+	// I do not delete it because “If it works do not touch it” in the future I remove
+	// it but for my future self these things no longer have any function in theory ....
+	// So if you need to use it go ahead.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	UBoxComponent* BoxTrigger;
 

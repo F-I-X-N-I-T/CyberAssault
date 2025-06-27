@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "FpsPlayer.generated.h"
 
+class AWeaponPickup;
 class USpringArmComponent;
 struct FInputActionValue;
 class UInputMappingContext;
@@ -47,6 +48,12 @@ protected:
 
 	UFUNCTION()
 	void InteractEnhancedInput(const FInputActionValue& Value);
+
+	UPROPERTY()
+	AFpsPlayer* WeaponMesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
+	TSubclassOf<AWeaponPickup> WeaponClass;
 	
 private:
 
