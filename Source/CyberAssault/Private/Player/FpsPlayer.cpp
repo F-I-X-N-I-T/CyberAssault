@@ -147,3 +147,15 @@ void AFpsPlayer::PlayerHideShowMessage()
 }
 
 // End Line Trace
+
+// Grabbed
+
+void AFpsPlayer::SpawnWeapon()
+{
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Weapon Spawned VAR CPP!"));
+	}
+}
+
+// End Grabbed

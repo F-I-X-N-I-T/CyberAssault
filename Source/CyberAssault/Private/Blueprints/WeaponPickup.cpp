@@ -6,6 +6,7 @@
 #include "Components/BoxComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Player/FpsPlayer.h"
 
 // Sets default values
 AWeaponPickup::AWeaponPickup()
@@ -40,12 +41,19 @@ void AWeaponPickup::PlayerInteract_Implementation()
 	IFpsInterface::PlayerInteract_Implementation();
 	if (IFpsInterface* ImplementInterface = Cast<IFpsInterface>(this))
 	{
+		
 		ImplementInterface->Execute_InternalInteract(this);
 	}
-	
+
 	if (BeepSoundPickup)
 	{
 		UGameplayStatics::PlaySound2D(this, BeepSoundPickup);
+	}
+
+	if (AFpsPlayer* PlayerRef = Cast<AFpsPlayer>(UGameplayStatics::GetPlayerCharacter(this, 0)))
+	{
+		PlayerRef->SpawnWeapon();
+		Destroy(); // Destroy the pickup after interaction
 	}
 }
 
