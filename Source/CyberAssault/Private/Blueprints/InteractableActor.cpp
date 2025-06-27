@@ -40,7 +40,11 @@ void AInteractableActor::PlayerInteract_Implementation()
 	IFpsInterface::PlayerInteract_Implementation();
 	if (IFpsInterface* ImplementInterface = Cast<IFpsInterface>(this))
 	{
-		ImplementInterface->Execute_InternalInteract(KeyPadRef);
+		if (KeyPadRef)
+		{
+			ImplementInterface->Execute_InternalInteract(KeyPadRef);
+		}
+		
 		if (BeepSoundLaptop)
 		{
 			UGameplayStatics::PlaySound2D(this, BeepSoundLaptop);

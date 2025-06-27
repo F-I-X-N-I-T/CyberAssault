@@ -38,14 +38,15 @@ void AWeaponPickup::BeginPlay()
 void AWeaponPickup::PlayerInteract_Implementation()
 {
 	IFpsInterface::PlayerInteract_Implementation();
-	//if (IFpsInterface* ImplementInterface = Cast<IFpsInterface>(this))
-	//{
-		//ImplementInterface->Execute_InternalInteract(KeyPadRef);
-		if (BeepSoundPickup)
-		{
-			UGameplayStatics::PlaySound2D(this, BeepSoundPickup);
-		}
-	//}
+	if (IFpsInterface* ImplementInterface = Cast<IFpsInterface>(this))
+	{
+		ImplementInterface->Execute_InternalInteract(this);
+	}
+	
+	if (BeepSoundPickup)
+	{
+		UGameplayStatics::PlaySound2D(this, BeepSoundPickup);
+	}
 }
 
 void AWeaponPickup::ShowMessage_Implementation()
