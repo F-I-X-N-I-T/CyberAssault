@@ -7,6 +7,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Blueprints/WeaponPickup.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Interface/FpsInterface.h"
 
@@ -152,9 +153,16 @@ void AFpsPlayer::PlayerHideShowMessage()
 
 void AFpsPlayer::SpawnWeapon()
 {
-	if (GEngine)
+	if (WeaponClass)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Weapon Spawned VAR CPP!"));
+		
+		WeaponSkeletalMesh = GetWorld()->SpawnActor<AWeaponPickup>(WeaponClass, FVector::ZeroVector, FRotator::ZeroRotator, FActorSpawnParameters());
+		if (WeaponSkeletalMesh)
+		{
+			WeaponSkeletalMesh->SetActorEnableCollision(false); // Disable collision for the weapon pickup. Since the weapon has collisions activated in order to make use of the widget
+			WeaponSkeletalMesh->SetOwner(this); // Set the player as the owner of the weapon
+			WeaponSkeletalMesh->AttachToComponent(PlayerMesh, FAttachmentTransformRules::SnapToTargetNotIncludingScale, TEXT("WeaponSocket"));
+		}
 	}
 }
 

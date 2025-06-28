@@ -50,7 +50,7 @@ protected:
 	void InteractEnhancedInput(const FInputActionValue& Value);
 
 	UPROPERTY()
-	AFpsPlayer* WeaponMesh;
+	AWeaponPickup* WeaponSkeletalMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
 	TSubclassOf<AWeaponPickup> WeaponClass;
